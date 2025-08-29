@@ -1,0 +1,1 @@
+the client and server ui should be easy to use and rural comprehensed adding offline mode activity
