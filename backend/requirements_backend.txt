@@ -1,1 +1,0 @@
-need to generate all the required backend structure here in this folder
