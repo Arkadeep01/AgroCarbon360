@@ -1,0 +1,1 @@
+create package.json, tailwind.config.js, vite.config.js, Dockerfile in this src folder
