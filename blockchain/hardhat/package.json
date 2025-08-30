@@ -1,1 +1,8 @@
-
+{
+"name": "agrocarbon-hardhat",
+"version": "1.0.0",
+"devDependencies": {
+"hardhat": "^2.16.0",
+"@nomicfoundation/hardhat-toolbox": "^3.0.0"
+}
+}
