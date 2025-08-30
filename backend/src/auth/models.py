@@ -1,7 +1,7 @@
 # backend/src/auth/models.py
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
-from backend.src.db.base_class import Base
+from ..db.base_class import Base
 
 ## Define your SQLAlchemy models here
 # ROLES: Admin, farmer, FPO, auditor

@@ -1,8 +1,20 @@
 {
-"name": "agrocarbon-hardhat",
-"version": "1.0.0",
-"devDependencies": {
-"hardhat": "^2.16.0",
-"@nomicfoundation/hardhat-toolbox": "^3.0.0"
-}
+  "name": "agrocarbon-hardhat",
+  "version": "1.0.0",
+  "description": "Hardhat configuration for AgroCarbon360 blockchain contracts",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy.js",
+    "node": "hardhat node",
+    "clean": "hardhat clean"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "@openzeppelin/contracts": "^4.9.0",
+    "hardhat": "^2.16.0",
+    "dotenv": "^16.0.0",
+    "@nomicfoundation/hardhat-verify": "^1.1.0",
+    "hardhat-gas-reporter": "^1.0.9"
+  }
 }

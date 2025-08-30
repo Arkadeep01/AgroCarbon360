@@ -1,7 +1,7 @@
 ## backend/src/db/dependency.py
 from typing import Generator
 from sqlalchemy.orm import Session
-from backend.src.db.session import SessionLocal
+from .session import SessionLocal
 
 # Generator function to get a database session (Generator[yield_type, send_type, return_type])
 def get_db() -> Generator[Session, None, None]:

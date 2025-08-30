@@ -1,0 +1,30 @@
+{
+  "name": "agrocarbon360-blockchain",
+  "version": "1.0.0",
+  "description": "Blockchain smart contracts for AgroCarbon360 carbon credits",
+  "main": "index.js",
+  "scripts": {
+    "compile": "cd hardhat && npx hardhat compile",
+    "test": "cd hardhat && npx hardhat test",
+    "deploy:local": "cd hardhat && npx hardhat run scripts/deploy.js --network localhost",
+    "deploy:testnet": "cd hardhat && npx hardhat run scripts/deploy.js --network testnet",
+    "deploy:mainnet": "cd hardhat && npx hardhat run scripts/deploy.js --network mainnet",
+    "node": "cd hardhat && npx hardhat node",
+    "clean": "cd hardhat && npx hardhat clean"
+  },
+  "keywords": [
+    "blockchain",
+    "ethereum",
+    "carbon-credits",
+    "smart-contracts",
+    "hardhat"
+  ],
+  "author": "AgroCarbon360 Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "@openzeppelin/contracts": "^4.9.0",
+    "hardhat": "^2.16.0",
+    "dotenv": "^16.0.0"
+  }
+}

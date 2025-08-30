@@ -1,0 +1,19 @@
+# Backend dependencies for AgroCarbon360
+fastapi==0.116.1
+uvicorn[standard]==0.35.0
+sqlalchemy==2.0.43
+alembic==1.16.5
+pydantic==2.11.7
+pydantic[email]==2.11.7
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.6
+starlette==0.47.3
+greenlet==3.2.4
+bcrypt==4.3.0
+cryptography==45.0.6
+python-dotenv==1.0.0
+
+# Blockchain integration
+web3==6.11.3
+eth-account==0.9.0

@@ -19,7 +19,6 @@ class UserBase(BaseModel):
     is_active: bool = True
     is_superuser: bool = False
     role_id: Optional[int] = None
-    password: str
 
 # This schema is used for creating new users, includes password and role_id
 class UserCreate(UserBase):
@@ -31,7 +30,7 @@ class UserOut(UserBase):
     id: int
     is_active: bool
     is_superuser: bool
-    role: RoleOut
+    role: Optional[RoleOut] = None
 
     class Config:
         orm_mode = True
