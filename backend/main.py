@@ -4,6 +4,8 @@ from starlette.middleware.cors import CORSMiddleware
 
 from src.auth import routes as auth_routes
 from src.db.init_db import init_db
+from src.carbon_engine.ipcc_methods import calculate_emissions
+
 
 
 
@@ -40,3 +42,8 @@ def read_root():
 @app.get("/health")
 def health_check():
     return {"status": "ok", "message": "Backend is running!"}
+
+
+print("Calculating sample emissions...")
+print(calculate_emissions(100, 'diesel'))
+print(calculate_emissions(200, 'electricity', 'IN'))

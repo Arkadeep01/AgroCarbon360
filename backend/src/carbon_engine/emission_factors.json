@@ -1,0 +1,13 @@
+{
+    "diesel": 2.68,
+    "gasoline": 2.31,
+    "natural_gas": 1.96,
+    "electricity": {
+        "US": 0.92,
+        "UK": 0.23,
+        "Germany": 0.40,
+        "France": 0.05,
+        "China": 0.70,
+        "India": 0.82
+    }
+}
