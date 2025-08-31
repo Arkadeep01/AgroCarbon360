@@ -1,0 +1,25 @@
+# train_anomaly_detect.py
+import tensorflow as tf
+from tensorflow.keras import layers, models
+import numpy as np
+
+# Normal data (simulate sensor readings)
+X_normal = np.random.normal(loc=0.5, scale=0.1, size=(900, 3))
+X_anomaly = np.random.normal(loc=1.0, scale=0.1, size=(100, 3))
+X = np.vstack([X_normal, X_anomaly])
+y = np.array([0]*900 + [1]*100)
+
+# Autoencoder model
+input_layer = layers.Input(shape=(3,))
+encoded = layers.Dense(4, activation="relu")(input_layer)
+decoded = layers.Dense(3, activation="sigmoid")(encoded)
+
+autoencoder = models.Model(input_layer, decoded)
+autoencoder.compile(optimizer="adam", loss="mse")
+autoencoder.fit(X_normal, X_normal, epochs=20, batch_size=32)
+
+# Convert to TFLite
+converter = tf.lite.TFLiteConverter.from_keras_model(autoencoder)
+tflite_model = converter.convert()
+with open("models/anomaly_detect.tflite", "wb") as f:
+    f.write(tflite_model)

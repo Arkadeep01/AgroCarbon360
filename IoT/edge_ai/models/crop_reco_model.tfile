@@ -1,0 +1,28 @@
+# train_crop_reco.py
+import tensorflow as tf
+from tensorflow.keras import layers, models
+import numpy as np
+
+# Example dummy dataset (replace with real soil/crop dataset)
+X = np.random.rand(1000, 5)  # [N, P, K, pH, temp]
+y = np.random.randint(0, 4, 1000)  # 4 crops: 0=rice,1=wheat,2=maize,3=cotton
+
+# One-hot encode labels
+y = tf.keras.utils.to_categorical(y, num_classes=4)
+
+# Model
+model = models.Sequential([
+    layers.Input(shape=(5,)),
+    layers.Dense(16, activation="relu"),
+    layers.Dense(8, activation="relu"),
+    layers.Dense(4, activation="softmax")
+])
+
+model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
+model.fit(X, y, epochs=20, batch_size=32)
+
+# Save as TFLite
+converter = tf.lite.TFLiteConverter.from_keras_model(model)
+tflite_model = converter.convert()
+with open("models/crop_reco_model.tflite", "wb") as f:
+    f.write(tflite_model)

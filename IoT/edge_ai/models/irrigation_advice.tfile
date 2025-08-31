@@ -1,0 +1,25 @@
+# train_irrigation_advice.py
+import tensorflow as tf
+from tensorflow.keras import layers, models
+import numpy as np
+
+# Dummy dataset
+X = np.random.rand(1000, 4)  # soil_moisture, temp, humidity, rainfall_forecast
+y = (X[:,0] < 0.3).astype(int)  # label: irrigate if soil moisture < 0.3
+
+# Model
+model = models.Sequential([
+    layers.Input(shape=(4,)),
+    layers.Dense(16, activation="relu"),
+    layers.Dense(8, activation="relu"),
+    layers.Dense(1, activation="sigmoid")
+])
+
+model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
+model.fit(X, y, epochs=15, batch_size=32)
+
+# Save as TFLite
+converter = tf.lite.TFLiteConverter.from_keras_model(model)
+tflite_model = converter.convert()
+with open("models/irrigation_advice.tflite", "wb") as f:
+    f.write(tflite_model)
