@@ -5,6 +5,7 @@ from starlette.middleware.cors import CORSMiddleware
 from src.auth import routes as auth_routes
 from src.db.init_db import init_db
 from src.carbon_engine.ipcc_methods import calculate_emissions
+from src.fpo import dashboard_api 
 
 
 
@@ -47,3 +48,5 @@ def health_check():
 print("Calculating sample emissions...")
 print(calculate_emissions(100, 'diesel'))
 print(calculate_emissions(200, 'electricity', 'IN'))
+
+app.include_router(dashboard_api.router)

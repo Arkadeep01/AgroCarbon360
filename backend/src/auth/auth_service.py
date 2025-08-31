@@ -8,6 +8,12 @@ from sqlalchemy.orm import Session
 import os
 from . import models, schemas
 from ..db.dependency import get_db
+from src.utils.hashing import hash_password, verify_password
+from src.utils.jwt_handler import create_access_token, decode_access_token
+from src.utils.validators import is_valid_email
+from src.utils.responses import success_response, error_response
+
+
 
 SECRET_KEY = os.getenv("SECRET_KEY", "your_secret_key")
 ALGORITHM = os.getenv("ALGORITHM", "HS256")
@@ -54,3 +60,31 @@ def get_current_user(db: Session = Depends(get_db), token: str = Depends(oauth2_
     if user is None:
         raise credentials_exception
     return user
+
+
+def register_user(db: Session, user_in: schemas.UserCreate) -> models.User:
+    # Validate email format
+    if not is_valid_email(user_in.email):
+        raise HTTPException(status_code=400, detail="Invalid email format")
+    
+    # Check for existing user
+    existing_user = db.query(models.User).filter(
+        (models.User.email == user_in.email) | (models.User.username == user_in.username)
+    ).first()
+    if existing_user:
+        raise HTTPException(status_code=400, detail="User with this email or username already exists")
+    
+    # Hash password and create user
+    hashed_password = hash_password(user_in.password)
+    db_user = models.User(
+        username=user_in.username,
+        email=user_in.email,
+        hashed_password=hashed_password,
+        is_active=user_in.is_active,
+        is_superuser=user_in.is_superuser,
+        role_id=user_in.role_id,
+    )
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user

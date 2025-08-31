@@ -4,6 +4,8 @@ from sqlalchemy.orm import Session
 from datetime import timedelta
 from . import models, schemas, auth_service, permissions
 from ..db.dependency import get_db
+from src.utils.logger import get_logger
+
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -58,3 +60,18 @@ def login_user(user_in: schemas.UserLogin, db: Session = Depends(get_db)):
 @router.get("/ping")
 def ping(db: Session = Depends(get_db)):
     return {"msg": "pong"}
+
+
+# Get current user endpoint
+logger = get_logger(__name__)
+
+@router.post("/login")
+def login_user():
+    logger.info("Login attempt started.")
+    try:
+        # Simulate login logic
+        logger.info("Login successful.")
+        return {"msg": "Login successful"}
+    except Exception as e:
+        logger.error(f"Login failed: {e}")
+        raise HTTPException(status_code=400, detail="Login failed")
