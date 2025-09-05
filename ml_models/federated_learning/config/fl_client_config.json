@@ -1,0 +1,21 @@
+{
+  "client": {
+    "name": "Farmer Client",
+    "location": "Unknown",
+    "data_path": "data/local_training_data.csv"
+  },
+  "server": {
+    "url": "http://localhost:8080",
+    "timeout": 30
+  },
+  "model": {
+    "type": "ch4_model",
+    "features": ["soil_moisture", "soil_ph", "soil_temp_c", "air_temp_c", "rain_last_7d_mm", "ec"],
+    "target": "ch4_emissions"
+  },
+  "training": {
+    "local_epochs": 5,
+    "batch_size": 32,
+    "learning_rate": 0.01
+  }
+}

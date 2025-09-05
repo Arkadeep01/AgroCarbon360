@@ -1,0 +1,19 @@
+{
+  "backend_url": "http://localhost:8000",
+  "data_storage": {
+    "base_path": "data",
+    "iot_data": "data/iot",
+    "satellite_data": "data/satellite",
+    "processed_data": "data/processed"
+  },
+  "processing": {
+    "batch_size": 1000,
+    "retry_attempts": 3,
+    "timeout_seconds": 30
+  },
+  "scheduling": {
+    "iot_collection_interval": 300,
+    "satellite_collection_interval": 86400,
+    "processing_interval": 3600
+  }
+}

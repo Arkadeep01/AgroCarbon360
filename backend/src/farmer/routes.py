@@ -1,7 +1,7 @@
 ## backend/src/farmer/routes.py
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from ..db.session import get_db
+from ..db.dependency import get_db
 from . import schemas, service
 from .forms import FarmerForm
 

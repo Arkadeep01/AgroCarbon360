@@ -1,11 +1,10 @@
 ## backend/src/fpo/dashboard_api.py
 from sqlalchemy.orm import Session
 from fastapi import Depends, APIRouter
-from backend.src.fpo import schemas, services
-from src.db.session import get_db
-
+from src.db.dependency import get_db
 from src.farmer import models as farmer_models
 from src.auth import models as auth_models
+from src.farmer import schemas as farmer_schemas
 
 router = APIRouter(prefix="/fpo/dashboard", tags=["FPO Dashboard"])
 
@@ -27,7 +26,7 @@ def get_fpo_dashboard_stats(db: Session = Depends(get_db)):
         "total_revenue": 0,  # Placeholder for future revenue tracking  
     }
 
-@router.get("/farmers", response_model=list[schemas.Farmer])
+@router.get("/farmers", response_model=list[farmer_schemas.Farmer])
 def get_fpo_farmers(db: Session = Depends(get_db)):
     """
     Retrieve a list of all farmers associated with the FPO.

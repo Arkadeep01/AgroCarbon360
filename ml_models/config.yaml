@@ -1,0 +1,26 @@
+data:
+  s1_path: "dataset/Data_S1.csv"     # relative path
+  s4_path: "dataset/Data_S4.csv"     # relative path
+  faostat_path: "/mnt/data/FAOSTAT_data_en_11-14-2023.csv"  # optional for later
+  sheet_name: null    # set if Excel has specific sheet, else null
+  test_size: 0.2
+  random_state: 42
+
+targets:
+  # ordered preference: we'll try to find the first that exists
+  field_level_candidates: ["ch4_kg_per_ha", "ch4_ef", "ch4_ml", "ch4", "ch4_tg"]
+  country_level_candidates: ["ch4_tg", "total_ch4", "emission_ch4"]
+
+training:
+  model_type: "random_forest"  # "random_forest" | "xgboost" (xgboost not in reqs to keep it lean)
+  n_estimators: 400
+  max_depth: null
+  min_samples_leaf: 2
+  cv_folds: 5
+
+export:
+  model_dir: "saved_models"
+  onnx_name: "ch4_baseline.onnx"
+  pkl_name: "ch4_baseline.pkl"
+  feature_list_name: "features.json"
+  model_card: "model_card.md"

@@ -16,4 +16,4 @@ class Auditlogs(Base):
     details = Column(Text, nullable=True)
     status = Column(String(50), nullable=False, default="pending")
     
-    auditor = relationship("User", back_populates="audit_logs")
+    auditor = relationship("User")

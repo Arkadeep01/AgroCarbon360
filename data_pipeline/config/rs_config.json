@@ -1,0 +1,51 @@
+"""
+Configuration files for AgroCarbon360 components
+"""
+
+# Remote Sensing Configuration
+{
+  "gee": {
+    "service_account": {
+      "email": "your-service-account@your-project.iam.gserviceaccount.com",
+      "key_file": "path/to/service-account-key.json"
+    },
+    "project": "your-gcp-project",
+    "assets": {
+      "sentinel2": "COPERNICUS/S2_SR",
+      "landsat8": "LANDSAT/LC08/C01/T1_SR",
+      "modis": "MODIS/006/MOD13Q1"
+    }
+  },
+  "sentinel_hub": {
+    "client_id": "your-sentinel-hub-client-id",
+    "client_secret": "your-sentinel-hub-client-secret",
+    "base_url": "https://services.sentinel-hub.com"
+  },
+  "planet": {
+    "api_key": "your-planet-api-key",
+    "base_url": "https://api.planet.com"
+  },
+  "processing": {
+    "cloud_cover_threshold": 20,
+    "resolution": 10,
+    "max_images_per_request": 50
+  },
+  "satellite_areas": [
+    {
+      "name": "Delhi",
+      "bounds": [77.0, 28.0, 77.1, 28.1]
+    },
+    {
+      "name": "Mumbai",
+      "bounds": [72.8, 19.0, 72.9, 19.1]
+    }
+  ],
+  "weather_locations": [
+    {
+      "name": "Delhi",
+      "lat": 28.6139,
+      "lon": 77.2090
+    }
+  ],
+  "weather_api_key": "your-openweathermap-api-key"
+}

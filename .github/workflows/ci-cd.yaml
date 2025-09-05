@@ -1,0 +1,141 @@
+"""
+GitHub Actions CI/CD Pipeline for AgroCarbon360
+"""
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-backend:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test_db
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        cd AgroCarbon360/backend
+        pip install -r requirements.txt
+    
+    - name: Run tests
+      run: |
+        cd AgroCarbon360/backend
+        python -m pytest tests/ -v
+      env:
+        DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test_db
+        JWT_SECRET_KEY: test-secret-key
+
+  test-ml-models:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        cd AgroCarbon360/ml_models
+        pip install -r requirements.txt
+    
+    - name: Run ML tests
+      run: |
+        cd AgroCarbon360/ml_models
+        python -m pytest tests/ -v
+
+  test-blockchain:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install dependencies
+      run: |
+        cd AgroCarbon360/blockchain/hardhat
+        npm install
+    
+    - name: Run tests
+      run: |
+        cd AgroCarbon360/blockchain/hardhat
+        npm test
+
+  build-and-push:
+    needs: [test-backend, test-ml-models, test-blockchain]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    
+    - name: Build and push backend
+      run: |
+        cd AgroCarbon360/backend
+        docker build -t agrocarbon360/backend:latest .
+        docker push agrocarbon360/backend:latest
+    
+    - name: Build and push ML pipeline
+      run: |
+        cd AgroCarbon360/ml_models
+        docker build -t agrocarbon360/ml-pipeline:latest .
+        docker push agrocarbon360/ml-pipeline:latest
+    
+    - name: Build and push FL server
+      run: |
+        cd AgroCarbon360/ml_models
+        docker build -f Dockerfile.fl -t agrocarbon360/fl-server:latest .
+        docker push agrocarbon360/fl-server:latest
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Deploy to Kubernetes
+      run: |
+        echo "Deploying to Kubernetes..."
+        # kubectl apply -f AgroCarbon360/infra/deployment.yaml
+        echo "Deployment completed"

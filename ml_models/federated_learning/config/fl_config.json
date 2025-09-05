@@ -1,0 +1,27 @@
+{
+  "server": {
+    "host": "0.0.0.0",
+    "port": 8080,
+    "max_clients": 100
+  },
+  "training": {
+    "rounds_per_epoch": 10,
+    "min_clients_per_round": 3,
+    "max_clients_per_round": 20,
+    "training_timeout": 3600,
+    "model_aggregation": "fedavg"
+  },
+  "models": {
+    "ch4_model": {
+      "type": "regression",
+      "features": ["soil_moisture", "soil_ph", "soil_temp_c", "air_temp_c", "rain_last_7d_mm", "ec"],
+      "target": "ch4_emissions"
+    },
+    "biomass_model": {
+      "type": "regression",
+      "features": ["dbh", "height", "species_encoded", "age", "density"],
+      "target": "biomass_kg"
+    }
+  },
+  "backend_url": "http://localhost:8000"
+}

@@ -1,0 +1,96 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: agrocarbon360
+      POSTGRES_USER: agrocarbon
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agrocarbon"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: postgresql://agrocarbon:password@postgres:5432/agrocarbon360
+      JWT_SECRET_KEY: your-super-secret-jwt-key-change-in-production
+      BLOCKCHAIN_RPC_URL: https://polygon-rpc.com
+      BLOCKCHAIN_CONTRACT_ADDRESS: 0x1234567890123456789012345678901234567890
+      CARBON_CREDITS_CONTRACT_ADDRESS: 0x1234567890123456789012345678901234567890
+      REDIS_URL: redis://redis:6379
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    volumes:
+      - ./data:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  ml-pipeline:
+    build:
+      context: ../ml_models
+      dockerfile: Dockerfile
+    environment:
+      BACKEND_URL: http://backend:8000
+      POSTGRES_URL: postgresql://agrocarbon:password@postgres:5432/agrocarbon360
+    depends_on:
+      - backend
+    volumes:
+      - ./ml_models:/app/models
+      - ./data:/app/data
+    command: python -m pipelines.scheduler
+
+  fl-server:
+    build:
+      context: ../ml_models
+      dockerfile: Dockerfile.fl
+    environment:
+      BACKEND_URL: http://backend:8000
+      FL_PORT: 8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      - backend
+    volumes:
+      - ./ml_models:/app/models
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./ssl:/etc/nginx/ssl
+    depends_on:
+      - backend
+      - fl-server
+
+volumes:
+  postgres_data:
+  redis_data:
