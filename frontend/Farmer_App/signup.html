@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signup | AgroCarbon360</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-radial-green min-h-screen flex flex-col"
+      style="background: radial-gradient(at 50%, #ffffff, #bbf7d0); background-attachment: fixed;">
+
+  <!-- Navbar -->
+  <header id="siteHeader" class="sticky top-0 z-50 mt-4 transition">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3 bg-white shadow-md rounded-xl relative">
+      <div class="flex items-center space-x-2">
+        <span class="text-green-700 text-2xl">🌱</span>
+        <a href="index.html" class="text-2xl font-bold text-green-700">AgroCarbon360</a>
+      </div>
+
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center space-x-6 font-medium">
+        <a href="index.html" class="px-3 py-1 rounded transition hover:bg-green-600 hover:text-white">Home</a>
+        <a href="features.html" class="px-3 py-1 rounded transition hover:bg-green-600 hover:text-white">Features</a>
+
+        <!-- Portal Dropdown -->
+        <div class="relative group">
+          <button class="px-3 py-1 rounded transition hover:bg-green-600 hover:text-white flex items-center">
+            Portal ▾
+          </button>
+          <div class="absolute left-0 top-full mt-0 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible 
+                      group-hover:opacity-100 group-hover:visible transition duration-200">
+            <a href="farmer.html" class="block px-4 py-2 hover:bg-green-600 hover:text-white">👩‍🌾 Farmer</a>
+            <a href="fpo.html" class="block px-4 py-2 hover:bg-green-600 hover:text-white">🏢 FPO</a>
+            <a href="verifier.html" class="block px-4 py-2 hover:bg-green-600 hover:text-white">🔍 Verifier</a>
+            <a href="admin.html" class="block px-4 py-2 hover:bg-green-600 hover:text-white">⚙️ Admin</a>
+          </div>
+        </div>
+
+        <a href="about.html" class="px-3 py-1 rounded transition hover:bg-green-600 hover:text-white">About Us</a>
+        <a href="contact.html" class="px-3 py-1 rounded transition hover:bg-green-600 hover:text-white">Contact</a>
+        <a href="help.html" class="px-3 py-1 rounded transition hover:bg-green-600 hover:text-white">Help & Support</a>
+      </div>
+
+      <!-- Back Button -->
+      <div class="hidden md:flex">
+        <a href="index.html" class="bg-green-600 text-white px-4 py-2 rounded-xl shadow hover:bg-green-700 transition">← Back</a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button id="menuBtn" class="md:hidden text-gray-700 text-3xl">☰</button>
+    </nav>
+  </header>
+  <!-- Signup Section -->
+  <main class="flex-1 flex items-center justify-center px-4">
+    <div class="bg-white p-10 rounded-2xl shadow-2xl w-full max-w-lg">
+      <h3 class="text-3xl font-bold text-green-700 mb-6 text-center">Signup</h3>
+
+      <!-- Step 1: Role Selection -->
+      <div id="roleSelection" class="space-y-4">
+        <p class="text-gray-600 text-center mb-4">Choose your role:</p>
+        <button onclick="selectRole('farmer')" class="w-full bg-green-600 text-white py-3 rounded-lg shadow hover:bg-green-700 transition">👩‍🌾 Farmer</button>
+        <button onclick="selectRole('fpo')" class="w-full bg-blue-600 text-white py-3 rounded-lg shadow hover:bg-blue-700 transition">👥 FPO / Cooperative</button>
+        <button onclick="selectRole('verifier')" class="w-full bg-purple-600 text-white py-3 rounded-lg shadow hover:bg-purple-700 transition">✅ Verifier / Auditor</button>
+        <button onclick="selectRole('admin')" class="w-full bg-red-600 text-white py-3 rounded-lg shadow hover:bg-red-700 transition">🏛️ Admin / Govt</button>
+      </div>
+
+      <!-- Step 2: Dynamic Form -->
+      <form id="signupForm" class="space-y-5 hidden mt-6"></form>
+
+      <p class="text-sm text-center mt-6">
+        Already have an account? 
+        <a href="login.html" class="text-green-700 hover:underline font-medium">Login</a>
+      </p>
+    </div>
+  </main>
+
+  <!-- JS -->
+  <script>
+    const signupForm = document.getElementById("signupForm");
+    const roleSelection = document.getElementById("roleSelection");
+
+    function selectRole(role) {
+      roleSelection.classList.add("hidden");
+      signupForm.classList.remove("hidden");
+
+      let fields = "";
+      if (role === "farmer") {
+        fields = `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <input type="text" placeholder="First Name" class="w-full border rounded-lg px-4 py-3 text-base focus:ring focus:ring-green-200" required />
+            <input type="text" placeholder="Last Name" class="w-full border rounded-lg px-4 py-3 text-base focus:ring focus:ring-green-200" required />
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <input type="tel" placeholder="Mobile Number" class="input" required />
+            <input type="email" placeholder="Email ID" class="input" required />
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <input type="text" placeholder="Village" class="input" required />
+            <input type="text" placeholder="District" class="input" required />
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <input type="text" placeholder="Pin Code" class="input" required />
+            <input type="text" placeholder="State" class="input" required />
+          </div>
+        `;
+      } else if (role === "fpo") {
+        fields = `
+          <input type="text" placeholder="Organization Name" class="input" required />
+          <input type="text" placeholder="Registration Number" class="input" required />
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <input type="text" placeholder="First Name" class="input" required />
+            <input type="text" placeholder="Last Name" class="input" required />
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <input type="tel" placeholder="Mobile Number" class="input" required />
+            <input type="email" placeholder="Email ID" class="input" required />
+          </div>
+          <input type="text" placeholder="No of farmer members" class="input" required />
+        `;
+      } else if (role === "verifier") {
+        fields = `
+          <input type="text" placeholder="Name" class="input" required />
+          <input type="text" placeholder="Organization Name" class="input" required />
+          <input type="email" placeholder="Official Email" class="input" required />
+          <input type="tel" placeholder="Phone Number" class="input" required />
+          <input type="text" placeholder="Verification ID" class="input" required />
+          <select class="input" required>
+            <option value="" disabled selected>Select Type</option>
+            <option>Verifier</option>
+            <option>Auditor</option>
+            <option>Certifier</option>
+          </select>
+        `;
+      } else if (role === "admin") {
+        fields = `
+          <input type="text" placeholder="Full Name" class="input" required />
+          <input type="text" placeholder="Designation" class="input" required />
+          <input type="email" placeholder="Official Email" class="input" required />
+          <input type="tel" placeholder="Phone Number" class="input" required />
+          <select class="input" required>
+            <option value="" disabled selected>Select Role</option>
+            <option>Admin</option>
+            <option>Policy Maker</option>
+            <option>Subsidy Allocator</option>
+          </select>
+        `;
+      }
+
+      signupForm.innerHTML = fields + `
+        <label class="flex items-center space-x-2 text-sm mt-3">
+          <input type="checkbox" required />
+          <span>I agree to the 
+            <a href="terms.html" class="text-green-700 underline">Terms</a> & 
+            <a href="privacy.html" class="text-green-700 underline">Privacy Policy</a>
+          </span>
+        </label>
+        <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg shadow-md hover:bg-green-700 mt-4 transition">Continue</button>
+      `;
+
+      signupForm.onsubmit = (e) => {
+        e.preventDefault();
+        const inputs = signupForm.querySelectorAll("input, select");
+        let userData = { role };
+        inputs.forEach(input => {
+          if (input.type !== "checkbox") {
+            userData[input.placeholder || input.name] = input.value;
+          }
+        });
+        localStorage.setItem("tempSignup", JSON.stringify(userData));
+        window.location.href = "create-password.html";
+      };
+    }
+  </script>
+</body>
+</html>

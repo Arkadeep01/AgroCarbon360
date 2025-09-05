@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroCarbon360 | Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-green-50 min-h-screen flex flex-col"
+      style="background: radial-gradient(circle at center, #ffffff 0%, #d1fae5 50%, #bbf7d0 100%); background-attachment: fixed;">
+
+  <!-- Navbar -->
+  <header id="siteHeader" class="sticky top-0 z-50 mt-4 transition">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3 bg-white shadow-md rounded-xl relative">
+      <div class="flex items-center space-x-2">
+        <span class="text-green-700 text-2xl">🌱</span>
+        <a href="index.html" class="text-2xl font-bold text-green-700">AgroCarbon360</a>
+      </div>
+
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center space-x-6 font-medium">
+        <a href="index.html" class="px-3 py-1 rounded transition hover:bg-green-600 hover:text-white">Home</a>
+        <a href="features.html" class="px-3 py-1 rounded transition hover:bg-green-600 hover:text-white">Features</a>
+
+        <!-- Portal Dropdown -->
+        <div class="relative group">
+          <button class="px-3 py-1 rounded transition hover:bg-green-600 hover:text-white flex items-center">
+            Portal ▾
+          </button>
+          <div class="absolute left-0 top-full mt-0 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible 
+                      group-hover:opacity-100 group-hover:visible transition duration-200">
+            <a href="farmer.html" class="block px-4 py-2 hover:bg-green-600 hover:text-white">👩‍🌾 Farmer</a>
+            <a href="fpo.html" class="block px-4 py-2 hover:bg-green-600 hover:text-white">🏢 FPO</a>
+            <a href="verifier.html" class="block px-4 py-2 hover:bg-green-600 hover:text-white">🔍 Verifier</a>
+            <a href="admin.html" class="block px-4 py-2 hover:bg-green-600 hover:text-white">⚙️ Admin</a>
+          </div>
+        </div>
+
+        <a href="about.html" class="px-3 py-1 rounded transition hover:bg-green-600 hover:text-white">About Us</a>
+        <a href="contact.html" class="px-3 py-1 rounded transition hover:bg-green-600 hover:text-white">Contact</a>
+        <a href="help.html" class="px-3 py-1 rounded transition hover:bg-green-600 hover:text-white">Help & Support</a>
+      </div>
+
+      <!-- Right Side Auth/Profile -->
+      <div class="hidden md:block" id="authSection">
+        <button id="authBtn" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+          Get Started
+        </button>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button id="menuBtn" class="md:hidden text-gray-700 text-3xl">☰</button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white shadow-md rounded-xl mt-2 px-4 py-4 space-y-2">
+      <a href="index.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">Home</a>
+      <a href="features.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">Features</a>
+      <a href="farmer.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">👩‍🌾 Farmer</a>
+      <a href="fpo.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">🏢 FPO</a>
+      <a href="verifier.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">🔍 Verifier</a>
+      <a href="admin.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">⚙️ Admin</a>
+      <a href="about.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">About Us</a>
+      <a href="contact.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">Contact</a>
+      <a href="help.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">Help & Support</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div id="pageContent" class="flex flex-1 items-center justify-center px-6 py-12 text-center">
+    <div>
+      <h1 class="text-4xl md:text-5xl font-bold text-green-700 mb-6">
+        Welcome to AgroCarbon360
+      </h1>
+      <p class="text-lg md:text-xl text-gray-700">
+        Empowering Farmers, FPOs, and Verifiers with Carbon Solutions.
+      </p>
+    </div>
+  </div>
+
+  <!-- Auth Modal -->
+  <div id="authModal" class="hidden fixed inset-0 flex items-center justify-center z-40 bg-black/30">
+    <div class="bg-white rounded-2xl shadow-2xl p-8 w-96 text-center relative">
+      <h2 class="text-2xl font-bold text-green-700 mb-6">Get Started</h2>
+      <div class="space-y-4">
+        <a href="login.html" 
+           class="block w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition">
+           🔑 Login
+        </a>
+        <a href="signup.html" 
+           class="block w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition">
+           ✍️ Sign Up
+        </a>
+      </div>
+      <button id="closeAuthModal" 
+              class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-sm font-bold">✕</button>
+    </div>
+  </div>
+
+  <script>
+    // DOM Elements
+    const authBtn = document.getElementById("authBtn");
+    const authModal = document.getElementById("authModal");
+    const closeAuthModal = document.getElementById("closeAuthModal");
+    const siteHeader = document.getElementById("siteHeader");
+    const pageContent = document.getElementById("pageContent");
+    const authSection = document.getElementById("authSection");
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    // Show modal when clicking Get Started
+    if (authBtn) {
+      authBtn.addEventListener("click", () => {
+        authModal.classList.remove("hidden");
+        pageContent.classList.add("hidden");
+      });
+    }
+
+    // Close modal
+    const closeModal = () => {
+      authModal.classList.add("hidden");
+      pageContent.classList.remove("hidden");
+    };
+
+    closeAuthModal.addEventListener("click", closeModal);
+    authModal.addEventListener("click", (e) => {
+      if (e.target === authModal) closeModal();
+    });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+    // Mobile menu toggle
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+
+    // Check if user is logged in
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (loggedInUser) {
+      authSection.innerHTML = `
+        <div class="relative group">
+          <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition flex items-center">
+            👤 ${loggedInUser.name || "My Profile"} ▾
+          </button>
+          <div class="absolute left-0 top-full mt-0 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible 
+                      group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
+            <a href="editprofile.html" class="block px-4 py-2 hover:bg-green-600 hover:text-white">✏️ Edit Profile</a>
+            <a href="dashboard.html" class="block px-4 py-2 hover:bg-green-600 hover:text-white">📊 Dashboard</a>
+            <button id="logoutBtn" class="w-full text-left block px-4 py-2 hover:bg-green-600 hover:text-white">🚪 Logout</button>
+          </div>
+        </div>
+      `;
+
+      setTimeout(() => {
+        const logoutBtn = document.getElementById("logoutBtn");
+        if (logoutBtn) {
+          logoutBtn.addEventListener("click", () => {
+            localStorage.removeItem("loggedInUser");
+            alert("✅ Logged out successfully!");
+            window.location.reload();
+          });
+        }
+      }, 100);
+    }
+  </script>
+
+</body>
+</html>

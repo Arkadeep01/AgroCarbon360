@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Features | AgroCarbon360</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-green-50 min-h-screen flex flex-col"
+      style="background: radial-gradient(circle at center, #ffffff 0%, #d1fae5 50%, #bbf7d0 100%);">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 mt-4">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3 bg-white shadow-md rounded-xl">
+      <div class="flex items-center space-x-2">
+        <span class="text-green-700 text-2xl">🌱</span>
+        <a href="index.html" class="text-2xl font-bold text-green-700">AgroCarbon360</a>
+      </div>
+      <div class="flex space-x-4 hidden md:flex">
+        <!-- Back Button -->
+        <a href="index.html" class="bg-green-600 text-white px-4 py-2 rounded-xl shadow hover:bg-green-700 transition">← Back</a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button id="menuBtn" class="md:hidden text-gray-700 text-3xl">☰</button>
+    </nav>
+  </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white shadow-md rounded-xl mt-2 px-4 py-4 space-y-2">
+      <a href="index.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">Home</a>
+      <a href="features.html" class="block px-3 py-2 rounded bg-green-600 text-white">Features</a>
+      <a href="farmer.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">👩‍🌾 Farmer</a>
+      <a href="fpo.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">🏢 FPO</a>
+      <a href="verifier.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">🔍 Verifier</a>
+      <a href="admin.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">⚙️ Admin</a>
+      <a href="about.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">About Us</a>
+      <a href="contact.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">Contact</a>
+      <a href="help.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">Help & Support</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 py-12 px-6 max-w-7xl mx-auto">
+    <h1 class="text-4xl font-bold text-green-700 text-center mb-12">Our Key Features</h1>
+
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <!-- Feature Card -->
+      <div class="bg-white p-6 rounded-2xl shadow-lg text-center hover:shadow-2xl transition">
+        <div class="text-5xl mb-4">📊</div>
+        <h2 class="text-2xl font-semibold mb-2">Dashboard Analytics</h2>
+        <p class="text-gray-700">Monitor carbon savings, reports, and key metrics in one intuitive dashboard.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow-lg text-center hover:shadow-2xl transition">
+        <div class="text-5xl mb-4">📝</div>
+        <h2 class="text-2xl font-semibold mb-2">Report Submission</h2>
+        <p class="text-gray-700">Easily submit reports of sustainable practices with automated carbon calculations.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow-lg text-center hover:shadow-2xl transition">
+        <div class="text-5xl mb-4">🔍</div>
+        <h2 class="text-2xl font-semibold mb-2">Verification System</h2>
+        <p class="text-gray-700">Certified verifiers can check and validate submitted reports to ensure accuracy.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow-lg text-center hover:shadow-2xl transition">
+        <div class="text-5xl mb-4">💬</div>
+        <h2 class="text-2xl font-semibold mb-2">Support & Chatbot</h2>
+        <p class="text-gray-700">Get instant help with FAQs or chat directly with our intelligent support bot.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow-lg text-center hover:shadow-2xl transition">
+        <div class="text-5xl mb-4">🌱</div>
+        <h2 class="text-2xl font-semibold mb-2">Sustainability Tracking</h2>
+        <p class="text-gray-700">Track carbon reduction and eco-friendly practices for farmers and FPOs.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow-lg text-center hover:shadow-2xl transition">
+        <div class="text-5xl mb-4">🔒</div>
+        <h2 class="text-2xl font-semibold mb-2">Secure Access</h2>
+        <p class="text-gray-700">Role-based portals ensure secure access for farmers, FPOs, verifiers, and admins.</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  </script>
+
+</body>
+</html>

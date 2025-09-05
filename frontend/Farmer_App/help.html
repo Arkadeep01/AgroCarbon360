@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Help & Support | AgroCarbon360</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-green-50 min-h-screen flex flex-col"
+      style="background: radial-gradient(circle at center, #ffffff 0%, #d1fae5 50%, #bbf7d0 100%);">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 mt-4">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3 bg-white shadow-md rounded-xl">
+      <div class="flex items-center space-x-2">
+        <span class="text-green-700 text-2xl">🌱</span>
+        <a href="index.html" class="text-2xl font-bold text-green-700">AgroCarbon360</a>
+      </div>
+      <div class="flex space-x-4 hidden md:flex">
+        <!-- Back Button -->
+        <a href="index.html" class="bg-green-600 text-white px-4 py-2 rounded-xl shadow hover:bg-green-700 transition">← Back</a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button id="menuBtn" class="md:hidden text-gray-700 text-3xl">☰</button>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main class="flex-1 py-8">
+    <div class="max-w-7xl mx-auto px-6 space-y-8">
+
+      <!-- FAQ Section -->
+      <section class="bg-white p-6 rounded-xl shadow-lg">
+        <h2 class="text-2xl font-bold text-green-700 mb-6">📖 Frequently Asked Questions</h2>
+        <div class="space-y-4">
+          <details class="border rounded-lg p-4 mb-3">
+            <summary class="cursor-pointer font-semibold mb-2">How do I submit a new report?</summary>
+            <p class="mt-2 mb-4 text-gray-700">Go to the Reports page and click "➕ Submit New Report". Fill in details and save.</p>
+          </details>
+          <details class="border rounded-lg p-4 mb-3">
+            <summary class="cursor-pointer font-semibold mb-2">Can I edit a submitted report?</summary>
+            <p class="mt-2 mb-4 text-gray-700">Yes, go to "My Reports", select your report, and click ✏️ Edit.</p>
+          </details>
+          <details class="border rounded-lg p-4 mb-3">
+            <summary class="cursor-pointer font-semibold mb-2">What is "Carbon Saved"?</summary>
+            <p class="mt-2 mb-4 text-gray-700">It refers to the estimated CO₂ reduction achieved through your sustainable practices.</p>
+          </details>
+        </div>
+
+      <!-- Contact Section -->
+        <h2 class="text-2xl font-bold text-green-700 mt-6 mb-4">📞 Contact Support</h2>
+        <p class="text-gray-700 mb-3">If your question is not listed above, reach us:</p>
+        <ul class="space-y-2 text-gray-700 mb-6">
+          <li>📧 Email: <a href="mailto:support@agrocarbon360.com" class="text-green-600 hover:underline">support@agrocarbon360.com</a></li>
+          <li>📱 Phone: +91 98765 43210</li>
+          <li>🌍 Website: <a href="index.html" class="text-green-600 hover:underline">www.agrocarbon360.com</a></li>
+        </ul>
+
+      <!-- Chatbot Section -->
+        <h2 class="text-2xl font-bold text-green-700 mt-6 mb-4">💬 Chat with Us</h2>
+        <div class="border rounded-lg p-4 bg-gray-50 flex flex-col min-h-[200px] max-h-[400px] overflow-y-auto mb-3" id="chatWindow">
+          <p class="text-gray-600 mb-2">🤖 Bot: Hi! How can I help you today?</p>
+        </div>
+        <div class="flex flex-col sm:flex-row mt-3 mb-6 gap-2">
+          <input type="text" id="userInput" placeholder="Type your message..." class="flex-1 border rounded-lg px-3 py-2 w-full sm:w-auto" />
+          <button onclick="sendMessage()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 w-full sm:w-auto">Send</button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const chatWindow = document.getElementById("chatWindow");
+      const message = input.value.trim();
+      if (!message) return;
+
+      chatWindow.innerHTML += `<p class="text-gray-800 mb-2"><strong>You:</strong> ${message}</p>`;
+
+      // Simple bot response (for prototype)
+      let reply = "🤖 Sorry, I am still learning. Please check the FAQ above.";
+      if (message.toLowerCase().includes("report")) {
+        reply = "🤖 To submit a report, go to Reports → ➕ Submit New Report.";
+      }
+      if (message.toLowerCase().includes("edit")) {
+        reply = "🤖 To edit a report, go to My Reports and click ✏️ Edit.";
+      }
+
+      chatWindow.innerHTML += `<p class="text-gray-600 mb-2">${reply}</p>`;
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+      input.value = "";
+    }
+  </script>
+
+</body>
+</html>

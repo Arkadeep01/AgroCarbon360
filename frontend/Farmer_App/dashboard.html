@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | AgroCarbon360</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-green-50 min-h-screen flex flex-col"
+      style="background: radial-gradient(circle at center, #ffffff 0%, #d1fae5 50%, #bbf7d0 100%); background-attachment: fixed;">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 mt-4">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3 bg-white shadow-md rounded-xl">
+      <div class="flex items-center space-x-2">
+        <span class="text-green-700 text-2xl">🌱</span>
+        <a href="index.html" class="text-2xl font-bold text-green-700">AgroCarbon360</a>
+      </div>
+      <div class="flex space-x-4 hidden md:flex">
+      <!-- Back Button -->
+        <a href="index.html" class="bg-green-600 text-white px-4 py-2 rounded-xl shadow hover:bg-green-700 transition">← Back</a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button id="menuBtn" class="md:hidden text-gray-700 text-3xl">☰</button>
+    </nav>
+  </header>
+
+  <!-- Dashboard Content -->
+  <main class="flex-1 px-6 py-10 max-w-6xl mx-auto">
+    <!-- Welcome -->
+    <h1 class="text-3xl font-bold text-green-700 mb-6">👋 Welcome, <span id="username"></span></h1>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+      <div class="bg-white shadow-lg rounded-2xl p-6 text-center">
+        <p class="text-gray-500">🌍 Total Carbon Saved</p>
+        <h2 class="text-2xl font-bold text-green-700 mt-2" id="carbonSaved">0 kg CO₂</h2>
+      </div>
+      <div class="bg-white shadow-lg rounded-2xl p-6 text-center">
+        <p class="text-gray-500">💰 Earned Credits</p>
+        <h2 class="text-2xl font-bold text-green-700 mt-2" id="credits">0</h2>
+      </div>
+      <div class="bg-white shadow-lg rounded-2xl p-6 text-center">
+        <p class="text-gray-500">📅 Reports Submitted</p>
+        <h2 class="text-2xl font-bold text-green-700 mt-2" id="reports">0</h2>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <h2 class="text-2xl font-semibold text-green-700 mb-4">Quick Actions</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <a href="upload_report.html" class="block bg-green-600 text-white text-center py-6 rounded-xl shadow-lg hover:bg-green-700 transition">📤 Upload Report</a>
+      <a href="payments.html" class="block bg-yellow-500 text-white text-center py-6 rounded-xl shadow-lg hover:bg-yellow-600 transition">💳 View Payments</a>
+      <a href="editprofile.html" class="block bg-blue-500 text-white text-center py-6 rounded-xl shadow-lg hover:bg-blue-600 transition">📝 Edit Profile</a>
+    </div>
+  </main>
+
+  <script>
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+    if (!loggedInUser) {
+      alert("⚠️ You must log in first!");
+      window.location.href = "login.html";
+    } else {
+      document.getElementById("username").innerText = loggedInUser.name || "Farmer";
+
+      // Prototype Stats (could be fetched later from API)
+      document.getElementById("carbonSaved").innerText = loggedInUser.carbonSaved || "120 kg CO₂";
+      document.getElementById("credits").innerText = loggedInUser.credits || "10";
+      document.getElementById("reports").innerText = loggedInUser.reports || "2";
+    }
+
+    function editProfile() {
+      window.location.href = "editprofile.html";
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "login.html";
+    }
+  </script>
+
+</body>
+</html>

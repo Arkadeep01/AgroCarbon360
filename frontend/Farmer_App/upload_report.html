@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload Report | AgroCarbon360</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="font-sans bg-radial-green min-h-screen flex flex-col"
+      style="background: radial-gradient(at 50%, #ffffff, #bbf7d0); background-attachment: fixed;">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 mt-4">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3 bg-white shadow-md rounded-xl">
+      <div class="flex items-center space-x-2">
+        <span class="text-green-700 text-2xl">🌱</span>
+        <a href="index.html" class="text-2xl font-bold text-green-700">AgroCarbon360</a>
+      </div>
+      <div class="flex space-x-4">
+        <a href="dashboard.html" class="px-4 py-2 rounded transition hover:bg-green-600 hover:text-white">📊 Dashboard</a>
+        <a href="index.html" class="bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700 transition">← Back</a>
+      </div>
+    </div>
+    <!-- Mobile Hamburger -->
+    <button id="menuBtn" class="md:hidden text-gray-700 text-3xl">☰</button>
+</nav>
+</header>
+
+    <!-- Upload Report Section -->
+    <main class="flex-1 flex items-center justify-center px-4">
+        <div class="bg-white p-10 rounded-2xl shadow-2xl w-full max-w-lg">
+            <h1 class="text-3xl font-bold text-green-700 mb-6 text-center">Upload Report</h1>
+
+    <form id="reportForm" class="space-y-4">
+      <div>
+        <label class="block text-gray-700">Report Title</label>
+        <input type="text" id="title" required class="w-full border rounded px-3 py-2" />
+      </div>
+      <div>
+        <label class="block text-gray-700">Carbon Saved (kg CO₂)</label>
+        <input type="number" id="carbon" required class="w-full border rounded px-3 py-2" />
+      </div>
+      <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">Submit</button>
+    </form>
+
+    <a href="reports.html" class="block text-center mt-4 text-green-600 hover:underline">← Back to Reports</a>
+  </div>
+
+  <script>
+    document.getElementById("reportForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const title = document.getElementById("title").value.trim();
+      const carbon = document.getElementById("carbon").value.trim();
+
+      let reports = JSON.parse(localStorage.getItem("reports")) || [];
+
+      const report = {
+        id: Date.now(),
+        title,
+        date: new Date().toLocaleDateString(),
+        carbon: carbon + " kg CO₂",
+        status: "Pending"
+      };
+
+      reports.push(report);
+      localStorage.setItem("reports", JSON.stringify(reports));
+
+      window.location.href = "reports.html";
+    });
+  </script>
+
+</body>
+</html>

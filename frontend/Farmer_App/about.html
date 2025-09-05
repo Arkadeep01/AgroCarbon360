@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | AgroCarbon360</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-green-50 min-h-screen flex flex-col"
+      style="background: radial-gradient(circle at center, #ffffff 0%, #d1fae5 50%, #bbf7d0 100%);">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 mt-4">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3 bg-white shadow-md rounded-xl">
+      <div class="flex items-center space-x-2">
+        <span class="text-green-700 text-2xl">🌱</span>
+        <a href="index.html" class="text-2xl font-bold text-green-700">AgroCarbon360</a>
+      </div>
+      <div class="flex space-x-4 hidden md:flex">
+        <!-- Back Button -->
+        <a href="index.html" class="bg-green-600 text-white px-4 py-2 rounded-xl shadow hover:bg-green-700 transition">← Back</a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button id="menuBtn" class="md:hidden text-gray-700 text-3xl">☰</button>
+    </nav>
+  </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white shadow-md rounded-xl mt-2 px-4 py-4 space-y-2">
+      <a href="index.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">Home</a>
+      <a href="features.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">Features</a>
+      <a href="farmer.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">👩‍🌾 Farmer</a>
+      <a href="fpo.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">🏢 FPO</a>
+      <a href="verifier.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">🔍 Verifier</a>
+      <a href="admin.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">⚙️ Admin</a>
+      <a href="about.html" class="block px-3 py-2 rounded bg-green-600 text-white">About Us</a>
+      <a href="contact.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">Contact</a>
+      <a href="help.html" class="block px-3 py-2 rounded hover:bg-green-600 hover:text-white">Help & Support</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 px-6 py-12 max-w-7xl mx-auto space-y-12">
+    <!-- Hero Section -->
+    <section class="text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-green-700 mb-4">About AgroCarbon360</h1>
+      <p class="text-lg md:text-xl text-gray-700 max-w-5xl mx-auto">
+        AgroCarbon360 empowers farmers, FPOs, and verifiers to adopt sustainable agricultural practices, track carbon savings, and contribute to a greener planet.
+      </p>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="bg-white p-8 rounded-2xl shadow-lg">
+      <h2 class="text-3xl font-bold text-green-700 mb-4 text-center">Our Mission</h2>
+      <p class="text-gray-700 text-center max-w-6xl mx-auto">
+        To enable eco-friendly farming and carbon-conscious practices across India by providing an easy-to-use digital platform for monitoring, reporting, and verifying carbon reduction.
+      </p>
+    </section>
+
+    <!-- Vision Section -->
+    <section class="bg-white p-8 rounded-2xl shadow-lg">
+      <h2 class="text-3xl font-bold text-green-700 mb-4 text-center">Our Vision</h2>
+      <p class="text-gray-700 text-center max-w-6xl mx-auto">
+        To build a sustainable future where agriculture not only feeds the nation but also protects the environment, promoting a greener, healthier planet for generations to come.
+      </p>
+    </section>
+
+    <!-- Values Section -->
+    <section class="grid gap-8 md:grid-cols-3">
+      <div class="bg-white p-6 rounded-2xl shadow-lg text-center hover:shadow-2xl transition">
+        <div class="text-5xl mb-4">🌱</div>
+        <h3 class="text-2xl font-semibold mb-2">Sustainability</h3>
+        <p class="text-gray-700">Promoting eco-friendly practices in agriculture.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow-lg text-center hover:shadow-2xl transition">
+        <div class="text-5xl mb-4">🤝</div>
+        <h3 class="text-2xl font-semibold mb-2">Collaboration</h3>
+        <p class="text-gray-700">Connecting farmers, FPOs, and verifiers for impact.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow-lg text-center hover:shadow-2xl transition">
+        <div class="text-5xl mb-4">💡</div>
+        <h3 class="text-2xl font-semibold mb-2">Innovation</h3>
+        <p class="text-gray-700">Using technology to simplify carbon tracking and reporting.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  </script>
+
+</body>
+</html>

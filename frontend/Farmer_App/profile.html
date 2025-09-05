@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile | AgroCarbon360</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-green-50 min-h-screen flex flex-col"
+      style="background: radial-gradient(circle at center, #ffffff 0%, #d1fae5 50%, #bbf7d0 100%); background-attachment: fixed;">  
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3 bg-white shadow-md">
+      <!-- Logo -->
+      <div class="flex items-center space-x-2">
+        <span class="text-green-700 text-2xl">🌱</span>
+        <a href="index.html" class="text-2xl font-bold text-green-700">AgroCarbon360</a>
+      </div>
+
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center space-x-6 font-medium">
+        <a href="index.html" class="text-gray-700 hover:text-green-700">Home</a>
+        <a href="#" class="text-gray-700 hover:text-green-700">Features</a>
+        <a href="#" class="text-gray-700 hover:text-green-700">Farmer Portal</a>
+        <a href="#" class="text-gray-700 hover:text-green-700">FPO Dashboard</a>
+        <a href="#" class="text-gray-700 hover:text-green-700">Verifier Portal</a>
+        <a href="#" class="text-gray-700 hover:text-green-700">Admin</a>
+        <a href="#" class="text-gray-700 hover:text-green-700">Help & Support</a>
+      </div>
+
+      <!-- Auth Dropdown (Desktop only) -->
+      <div class="relative hidden md:block">
+        <button id="authBtn" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+          Get Started
+        </button>
+        <div id="authDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50"></div>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button id="menuBtn" class="md:hidden text-gray-700 text-3xl">☰</button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed top-0 left-0 w-full h-full bg-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden z-40">
+      <div class="flex justify-between items-center px-6 py-4 border-b">
+        <h2 class="text-xl font-bold text-green-700">Menu</h2>
+        <button id="closeBtn" class="text-3xl text-gray-700">✕</button>
+      </div>
+      <div class="flex flex-col space-y-6 px-6 py-6 text-lg font-medium">
+        <a href="index.html" class="text-gray-700 hover:text-green-700">Home</a>
+        <a href="#" class="text-gray-700 hover:text-green-700">Features</a>
+        <a href="#" class="text-gray-700 hover:text-green-700">Farmer Portal</a>
+        <a href="#" class="text-gray-700 hover:text-green-700">FPO Dashboard</a>
+        <a href="#" class="text-gray-700 hover:text-green-700">Verifier Portal</a>
+        <a href="#" class="text-gray-700 hover:text-green-700">Admin</a>
+        <a href="#" class="text-gray-700 hover:text-green-700">Help & Support</a>
+        <!-- Auth Links (Mobile only) -->
+        <div id="mobileAuthLinks" class="flex flex-col space-y-4 pt-4 border-t"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Profile Section -->
+  <main class="flex flex-1 items-center justify-center px-6 py-12">
+    <div class="bg-white rounded-xl shadow-lg w-full max-w-md p-8">
+      <h2 class="text-3xl font-bold text-green-700 mb-6 text-center">My Profile</h2>
+      <div id="profileInfo" class="space-y-4 text-lg text-gray-700"></div>
+    </div>
+  </main>
+
+  <script>
+    const authBtn = document.getElementById("authBtn");
+    const authDropdown = document.getElementById("authDropdown");
+    const mobileAuthLinks = document.getElementById("mobileAuthLinks");
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+    // If no user is logged in, redirect to login
+    if (!loggedInUser) {
+      window.location.href = "login.html";
+    }
+
+    // Show profile details
+    const profileInfo = document.getElementById("profileInfo");
+    if (loggedInUser) {
+      profileInfo.innerHTML = `
+        <p><strong>👤 Name:</strong> ${loggedInUser.name || "N/A"}</p>
+        <p><strong>📧 Email:</strong> ${loggedInUser.email}</p>
+      `;
+    }
+
+    // Desktop dropdown toggle
+    if (authBtn) {
+      authBtn.addEventListener("click", () => {
+        authDropdown.classList.toggle("hidden");
+      });
+    }
+
+    // Render auth links (desktop + mobile)
+    function renderAuthUI() {
+      if (loggedInUser) {
+        if (authBtn) authBtn.textContent = "My Account";
+        if (authDropdown) {
+          authDropdown.innerHTML = `
+            <a href="profile.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50">👤 Profile</a>
+            <a href="dashboard.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50">📊 Dashboard</a>
+            <button id="logoutBtn" class="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50">🚪 Logout</button>
+          `;
+        }
+
+        mobileAuthLinks.innerHTML = `
+          <a href="profile.html" class="text-gray-700 hover:text-green-700">👤 Profile</a>
+          <a href="dashboard.html" class="text-gray-700 hover:text-green-700">📊 Dashboard</a>
+          <button id="mobileLogoutBtn" class="text-red-600 hover:text-red-800 text-left">🚪 Logout</button>
+        `;
+
+        // Logout
+        setTimeout(() => {
+          const logoutBtn = document.getElementById("logoutBtn");
+          const mobileLogoutBtn = document.getElementById("mobileLogoutBtn");
+          if (logoutBtn) logoutBtn.addEventListener("click", () => {
+            localStorage.removeItem("loggedInUser");
+            window.location.href = "login.html";
+          });
+          if (mobileLogoutBtn) mobileLogoutBtn.addEventListener("click", () => {
+            localStorage.removeItem("loggedInUser");
+            window.location.href = "login.html";
+          });
+        }, 100);
+      }
+    }
+    renderAuthUI();
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", (e) => {
+      if (authBtn && !authBtn.contains(e.target) && !authDropdown.contains(e.target)) {
+        authDropdown.classList.add("hidden");
+      }
+    });
+
+    // Mobile Navbar Toggle
+    const menuBtn = document.getElementById("menuBtn");
+    const closeBtn = document.getElementById("closeBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.remove("-translate-x-full");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      mobileMenu.classList.add("-translate-x-full");
+    });
+  </script>
+</body>
+</html>

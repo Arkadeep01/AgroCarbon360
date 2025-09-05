@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroCarbon360 | Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-green-50 min-h-screen flex flex-col" 
+      style="background: radial-gradient(circle at center, #ffffff 0%, #d1fae5 50%, #bbf7d0 100%); background-attachment: fixed;">
+ 
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 mt-4">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3 bg-white shadow-md rounded-xl">
+      <div class="flex items-center space-x-2">
+        <span class="text-green-700 text-2xl">🌱</span>
+        <a href="index.html" class="text-2xl font-bold text-green-700">AgroCarbon360</a>
+      </div>
+
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center space-x-6 font-medium">
+        <a href="index.html" class="text-gray-700 hover:text-green-700">Home</a>
+        <a href="features.html" class="text-gray-700 hover:text-green-700">Features</a>
+        <a href="portal.html" class="text-gray-700 hover:text-green-700">Portal</a>
+        <a href="about.html" class="text-gray-700 hover:text-green-700">About Us</a>
+        <a href="contact.html" class="text-gray-700 hover:text-green-700">Contact</a>
+        <a href="help.html" class="text-gray-700 hover:text-green-700">Help & Support</a>
+      </div>
+
+      <!-- Auth Dropdown (Desktop only) -->
+      <div class="relative hidden md:block">
+        <button id="authBtn" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+          Get Started
+        </button>
+        <div id="authDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50"></div>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button id="menuBtn" class="md:hidden text-gray-700 text-3xl">☰</button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed top-0 left-0 w-72 h-full bg-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden z-40 shadow-lg">
+      <div class="flex justify-between items-center px-6 py-4 border-b">
+        <h2 class="text-xl font-bold text-green-700">Menu</h2>
+        <button id="closeBtn" class="text-3xl text-gray-700">✕</button>
+      </div>
+      <div class="flex flex-col space-y-6 px-6 py-6 text-lg font-medium">
+        <a href="index.html" class="text-gray-700 hover:text-green-700">Home</a>
+        <a href="features.html" class="text-gray-700 hover:text-green-700">Features</a>
+        <a href="portal.html" class="text-gray-700 hover:text-green-700">Portal</a>
+        <a href="about.html" class="text-gray-700 hover:text-green-700">About Us</a>
+        <a href="contact.html" class="text-gray-700 hover:text-green-700">Contact</a>
+        <a href="help.html" class="text-gray-700 hover:text-green-700">Help & Support</a>
+        <!-- Auth Links (Mobile only) -->
+        <div id="mobileAuthLinks" class="flex flex-col space-y-4 pt-4 border-t"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Portal Selection -->
+  <main class="flex flex-1 items-center justify-center px-6 py-12 text-center">
+    <div>
+  <h1 class="text-4xl md:text-5xl font-bold text-green-700 mb-12 text-center">
+    Choose Your Portal
+  </h1>
+
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-6xl">
+    <a href="farmer.html" class="p-8 bg-white rounded-2xl shadow hover:shadow-lg transition transform hover:-translate-y-1 text-center">
+      <h2 class="text-2xl font-semibold text-green-700 mb-3">👩‍🌾 Farmer</h2>
+      <p class="text-gray-600">Tools and resources for farmers to engage in carbon solutions.</p>
+    </a>
+    <a href="fpo.html" class="p-8 bg-white rounded-2xl shadow hover:shadow-lg transition transform hover:-translate-y-1 text-center">
+      <h2 class="text-2xl font-semibold text-green-700 mb-3">🏢 FPO</h2>
+      <p class="text-gray-600">Collaborate, manage projects, and monitor initiatives as an FPO.</p>
+    </a>
+    <a href="verifier.html" class="p-8 bg-white rounded-2xl shadow hover:shadow-lg transition transform hover:-translate-y-1 text-center">
+      <h2 class="text-2xl font-semibold text-green-700 mb-3">🔍 Verifier</h2>
+      <p class="text-gray-600">Verify, audit, and ensure transparency in carbon initiatives.</p>
+    </a>
+    <a href="admin.html" class="p-8 bg-white rounded-2xl shadow hover:shadow-lg transition transform hover:-translate-y-1 text-center">
+      <h2 class="text-2xl font-semibold text-green-700 mb-3">⚙️ Admin</h2>
+      <p class="text-gray-600">Manage users, oversee portals, and maintain system integrity.</p>
+    </a>
+  </div>
+  </div>
+
+</body>
+</html>

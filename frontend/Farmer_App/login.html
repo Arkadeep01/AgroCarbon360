@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | AgroCarbon360</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-radial-green min-h-screen flex flex-col"
+      style="background: radial-gradient(at 50%, #ffffff, #bbf7d0); background-attachment: fixed;">
+
+  <!-- Navbar -->
+  <header id="siteHeader" class="sticky top-0 z-50 mt-4 transition">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3 bg-white shadow-md rounded-xl relative">
+      <div class="flex items-center space-x-2">
+        <span class="text-green-700 text-2xl">🌱</span>
+        <a href="index.html" class="text-2xl font-bold text-green-700">AgroCarbon360</a>
+      </div>
+
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center space-x-6 font-medium">
+        <a href="index.html" class="px-3 py-1 rounded transition hover:bg-green-600 hover:text-white">Home</a>
+        <a href="features.html" class="px-3 py-1 rounded transition hover:bg-green-600 hover:text-white">Features</a>
+
+        <!-- Portal Dropdown -->
+        <div class="relative group">
+          <button class="px-3 py-1 rounded transition hover:bg-green-600 hover:text-white flex items-center">
+            Portal ▾
+          </button>
+          <div class="absolute left-0 top-full mt-0 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible 
+                      group-hover:opacity-100 group-hover:visible transition duration-200">
+            <a href="farmer.html" class="block px-4 py-2 hover:bg-green-600 hover:text-white">👩‍🌾 Farmer</a>
+            <a href="fpo.html" class="block px-4 py-2 hover:bg-green-600 hover:text-white">🏢 FPO</a>
+            <a href="verifier.html" class="block px-4 py-2 hover:bg-green-600 hover:text-white">🔍 Verifier</a>
+            <a href="admin.html" class="block px-4 py-2 hover:bg-green-600 hover:text-white">⚙️ Admin</a>
+          </div>
+        </div>
+
+        <a href="about.html" class="px-3 py-1 rounded transition hover:bg-green-600 hover:text-white">About Us</a>
+        <a href="contact.html" class="px-3 py-1 rounded transition hover:bg-green-600 hover:text-white">Contact</a>
+        <a href="help.html" class="px-3 py-1 rounded transition hover:bg-green-600 hover:text-white">Help & Support</a>
+      </div>
+
+      <!-- Back Button -->
+      <div class="hidden md:flex">
+        <a href="index.html" class="bg-green-600 text-white px-4 py-2 rounded-xl shadow hover:bg-green-700 transition">← Back</a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button id="menuBtn" class="md:hidden text-gray-700 text-3xl">☰</button>
+    </nav>
+  </header>
+  <!-- Login Section -->
+  <main class="flex-1 flex items-center justify-center px-4">
+    <div class="bg-white p-10 rounded-2xl shadow-2xl w-full max-w-lg">
+      <h3 class="text-3xl font-bold text-green-700 mb-6 text-center">Login</h3>
+      <form id="loginForm" class="space-y-5">
+        <input type="text" id="loginIdentifier" placeholder="Email or Phone Number" 
+          class="w-full border rounded-lg px-4 py-3 text-base focus:ring focus:ring-green-200" required />
+        <input type="password" id="loginPassword" placeholder="Password" 
+          class="w-full border rounded-lg px-4 py-3 text-base focus:ring focus:ring-green-200" required />
+        <div class="text-right">
+          <a href="forgotpassword.html" class="text-sm text-green-700 hover:underline">Forgot Password?</a>
+        </div>
+        <p id="loginError" class="hidden text-red-600 text-sm"></p>
+        <button type="submit" class="w-full bg-green-600 text-white py-3 text-lg rounded-lg hover:bg-green-700 transition">
+          Login
+        </button>
+      </form>
+      <p class="text-sm text-center mt-4">
+        Don’t have an account? <a href="signup.html" class="text-green-700 hover:underline">Sign Up</a>
+      </p>
+    </div>
+  </main>
+
+  <script>
+    const loginForm = document.getElementById("loginForm");
+    const loginError = document.getElementById("loginError");
+
+    loginForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const identifier = document.getElementById("loginIdentifier").value.trim();
+      const password = document.getElementById("loginPassword").value;
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+
+      // Find user by email or phone
+      const user = users.find(u => 
+        u["Email ID"] === identifier || 
+        u["Mobile Number"] === identifier || 
+        u["Official Email"] === identifier || 
+        u["Phone Number"] === identifier
+      );
+
+      if (!user) {
+        loginError.textContent = "❌ Account not found. Please sign up.";
+        loginError.classList.remove("hidden");
+        return;
+      }
+      if (user.password !== password) {
+        loginError.textContent = "❌ Invalid password.";
+        loginError.classList.remove("hidden");
+        return;
+      }
+
+      loginError.classList.add("hidden");
+      localStorage.setItem("loggedInUser", JSON.stringify(user));
+
+      // Redirect based on role
+      if (user.role === "farmer") {
+        window.location.href = "farmer.html";
+      } else if (user.role === "fpo") {
+        window.location.href = "fpo.html";
+      } else if (user.role === "verifier") {
+        window.location.href = "verifier.html";
+      } else if (user.role === "admin") {
+        window.location.href = "admin.html";
+      } else {
+        // Default fallback
+        window.location.href = "index.html";
+      }
+    });
+  </script>
+</body>
+</html>
