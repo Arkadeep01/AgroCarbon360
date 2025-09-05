@@ -1,15 +1,23 @@
-# AgroCarbon360
+[gdhy_v1.2_v1.3_20190128.zip](https://github.com/user-attachments/files/22079685/gdhy_v1.2_v1.3_20190128.zip)# AgroCarbon360
+We are developing a farmer-first, hybrid, AI + blockchain MRV platform that is:  
+*Inclusive (offline, voice, local languages),*
+*Transparent (uncertainty quantified + blockchain immutability),*
+*Affordable (shared IoT, open-source stack),*
+*Scalable (federated AI across zones),  and*
+*Impact-driven (carbon + co-benefits for NABARD’s mission).*
 
-AgroCarbon360 is a scalable **MRV (Measurement, Reporting & Verification) platform** for **agroforestry and rice-based carbon projects**.  
-It empowers **farmers, FPOs, auditors, and policymakers** to track carbon emissions, verify field data, and enable carbon credit trading in a transparent, affordable, and farmer-friendly way.  
 
----
+https://chatgpt.com/share/68b197a1-7a94-8001-8228-069bf93011ec
 
-## Features
-- **Farmer App (Mobile-first)** – Offline data entry, voice support, carbon wallet, AI recommendations.  
-- **FPO Dashboard** – Aggregate reports, manage members, track payouts, access marketplace.  
-- **Auditor Dashboard** – Blockchain-backed evidence review, sampling planner, audit reports.  
-- **Admin Dashboard (NABARD/Govt.)** – Program KPIs, policy configs, subsidy allocation, compliance logs.  
-- **ML & Remote Sensing** – NDVI, methane hotspot detection, biomass/carbon estimation.  
-- **Blockchain Integration** – Immutable records & transparent carbon credit transactions.
 
+https://github.com/ghjuliasialelli/AGBD/tree/main/Models
+dataset to train the model for Global scale Biomass data
+
+
+rice dataset -- done 
+
+Crop yield data -- done  gdhy_v1.2_v1.3_20190128
+
+global rice paddy inventory dataset -- grpi_hemco.nc   (methane emission)
+
+c4 vegetation dataset -- 
